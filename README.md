@@ -30,23 +30,25 @@ The table below lists the supported operating systems and Python versions requir
 
 ## 📝 Installation Guide
 
-> **NOTE:** If OpenVINO is installed globally, please do not run any of these commands in a terminal where setupvars.bat or setupvars.sh are sourced. For Windows, we recommend using _Command Prompt (cmd.exe)_, not _PowerShell_.
+> **NOTE:** If OpenVINO is installed globally, please do not run any of these commands in a terminal where setupvars.bat or setupvars.sh are sourced. 
+> For Windows, we recommend using _Command Prompt (cmd.exe)_, not _PowerShell_.
 
-### Step 1: Clone the Repository
+> **NOTE:** If you already installed openvino-dev and activated the openvino_env environment, you can skip to step 3.
+
+### Step 1: Create a Virtual Environment
+
+#### For Linux and macOS:
 
 ```bash
-git clone https://github.com/openvinotoolkit/openvino_notebooks.git
+python3 -m venv openvino_env
 ```
 
-### Step 2: Create a Virtual Environment
-
+#### For Windows:
 ```bash
-# Linux and macOS may require typing python3 instead of python
-cd openvino_notebooks
 python -m venv openvino_env
 ```
 
-### Step 3: Activate the Environment
+### Step 2: Activate the Environment
 
 #### For Linux and macOS:
 
@@ -60,14 +62,22 @@ source openvino_env/bin/activate
 openvino_env\Scripts\activate
 ```
 
+### Step 3: Clone the Repository
+
+```bash
+git clone https://github.com/openvinotoolkit/openvino_notebooks.git
+cd openvino_notebooks
+```
+
 ### Step 4: Install the Packages
 
 #### Installs OpenVINO tools and dependencies like Jupyter Lab:
 
 ```bash
-# Upgrade pip to the 20.2.* version to avoid dependency issues
-python -m pip install --upgrade pip==20.2.4
-pip install -r requirements.txt
+# Upgrade pip to the latest version.
+# Use pip's legacy dependency resolver to avoid dependency conflicts
+python -m pip install --upgrade pip
+pip install -r requirements.txt --use-deprecated=legacy-resolver
 ```
 
 ### Step 5: Install the virtualenv Kernel in Jupyter
@@ -79,8 +89,8 @@ python -m ipykernel install --user --name openvino_env
 ### Step 6: Launch the Notebooks!
 
 ```bash
-# To launch a single notebook
-jupyter notebook <notebook_filename>
+# To launch a single notebook, like the Monodepth notebook
+jupyter notebook notebooks/201-vision-monodepth/201-vision-monodepth.ipynb
 
 # To launch all notebooks in Jupyter Lab
 jupyter lab notebooks
@@ -100,7 +110,7 @@ To end your Jupyter session, press `Ctrl-c`. This will prompt you to `Shutdown t
 
 To deactivate your virtualenv, simply run `deactivate` from the terminal window where you activated `openvino_env`. This will deactivate your environment.
 
-To reactivate your environment, simply repeat [Step 3](#step-3-activate-the-environment) from the Install Guide.
+To reactivate your environment, simply repeat [Step 2](#step-2-activate-the-environment) from the Install Guide.
 
 ### Delete Virtual Environment _(Optional)_
 
